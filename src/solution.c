@@ -435,6 +435,20 @@ static msg_t solution_thread(void *arg)
       u8 n_ready_tdcp = tdcp_doppler(n_ready, nav_meas, n_ready_old,
                                      nav_meas_old, nav_meas_tdcp);
 
+debug_variable("nav_tc",(double)((u32)nav_tc));
+		
+for (u8 i=0; i<n_ready; i++) {
+sbp_send_msg(0x207,
+      sizeof(channel_measurement_t),
+      (u8 *)&meas[i]);
+	  }
+	/*
+for (u8 i=0; i<n_ready_tdcp; i++) {
+	  sbp_send_msg(0x208,
+      sizeof(navigation_measurement_t),
+      (u8*)&nav_meas_tdcp[i]);
+	  }
+		*/							 
       /* Store current observations for next time for
        * TDCP Doppler calculation. */
       memcpy(nav_meas_old, nav_meas, sizeof(nav_meas));
