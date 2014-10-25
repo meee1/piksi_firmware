@@ -86,6 +86,8 @@ static msg_t nav_msg_thread(void *arg)
                    &es_old[tracking_channel[i].prn], sizeof(ephemeris_t))) {
 
           printf("New ephemeris for PRN %02d\n", tracking_channel[i].prn+1);
+		  
+		sbp_send_msg(0x209, sizeof(ephemeris_t), (u8*)&es[tracking_channel[i].prn]);
 
           /* TODO: This is a janky way to set the time... */
           gps_time_t t;
