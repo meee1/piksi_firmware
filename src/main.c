@@ -76,6 +76,8 @@ static msg_t nav_msg_thread(void *arg)
                                   &es[tracking_channel[i].prn]);
         __asm__("CPSIE i;");
 
+		es[tracking_channel[i].prn].prn = tracking_channel[i].prn;
+		
         if (ret < 0)
           printf("PRN %02d ret %d\n", tracking_channel[i].prn+1, ret);
 
