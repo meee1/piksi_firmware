@@ -304,7 +304,7 @@ static msg_t solution_thread(void *arg)
       static navigation_measurement_t nav_meas[MAX_CHANNELS];
       chMtxLock(&es_mutex);
       calc_navigation_measurement(n_ready, meas, nav_meas,
-                                  (double)((u32)nav_tc)/SAMPLE_FREQ, es);
+                                  (double)((u32)nav_tc)/SAMPLE_FREQ, es, position_solution.pos_ecef);
       chMtxUnlock();
 
       static navigation_measurement_t nav_meas_tdcp[MAX_CHANNELS];
